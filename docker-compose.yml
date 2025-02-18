@@ -1,10 +1,18 @@
 version: '3.8'
 
+networks:
+  mailcatcher_net:
+    driver: bridge
+
 services:
   mailcatcher:
     image: sj26/mailcatcher
     container_name: mailcatcher
     restart: unless-stopped
+    networks:
+      mailcatcher_net:
+        aliases:
+          - mailcatcher
     ports:
       - "${SMTP_PORT}:1025"
       - "${MAILCATCHER_PORT}:1080"
